@@ -194,3 +194,21 @@ Open `http://localhost:5173` in your browser.
 npm run build
 ```
 Type checks and bundles production assets with Vite.
+
+---
+
+## Deploying to Vercel
+
+The project is fully pre-configured for instant **Vercel** deployment with zero manual adjustments needed:
+
+1. **Import from GitHub**:
+   - Go to [vercel.com](https://vercel.com) and click **"Add New Project"**.
+   - Select your repository: **`adhiboss/dynamosky`**.
+   - Vercel automatically detects the **Vite** preset (`Build Command: npm run build`, `Output Directory: dist`).
+2. **Environment Variables (Optional)**:
+   - If you want the live Gemini AI Dispatcher online, add:
+     - `GEMINI_API_KEY`: your Gemini API key (or `AI_API_KEY`).
+   - If omitted, the app automatically runs the engine's verified deterministic recovery template (100% offline capable).
+3. **Click "Deploy"**:
+   - Vercel builds the SPA and routes `/api/dispatch` through the included serverless function in `/api/dispatch.ts`.
+   - Your live URL (e.g., `https://dynamosky.vercel.app`) will be ready in under 1 minute!
