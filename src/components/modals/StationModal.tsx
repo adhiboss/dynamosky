@@ -44,6 +44,12 @@ export const StationModal: React.FC<StationModalProps> = ({ children }) => {
           icon: <Wrench size={20} color="#f59e0b" />,
           borderColor: 'rgba(245, 158, 11, 0.4)',
         };
+      case 'SCORE_AND_WORST_DAY':
+        return {
+          title: 'MISSION DEBRIEF — SCORE, STARS & WORST DAY CHALLENGES',
+          icon: <ShieldAlert size={20} color="#fbbf24" />,
+          borderColor: 'rgba(251, 191, 36, 0.4)',
+        };
       default:
         return {
           title: 'STATION CONSOLE',

@@ -1,7 +1,14 @@
 import { create } from 'zustand';
 import * as THREE from 'three';
 
-export type StationType = 'TOWER' | 'OPS_CENTER' | 'DEPARTURE_BOARD' | 'GATES' | 'HANGAR' | null;
+export type StationType =
+  | 'TOWER'
+  | 'OPS_CENTER'
+  | 'DEPARTURE_BOARD'
+  | 'GATES'
+  | 'HANGAR'
+  | 'SCORE_AND_WORST_DAY'
+  | null;
 
 interface GameState {
   // Player state

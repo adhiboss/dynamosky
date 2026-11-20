@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useGameStore } from '../../store/gameStore';
-import { Clock, Radio, Volume2, VolumeX, Compass, Navigation } from 'lucide-react';
+import { Clock, Radio, Volume2, VolumeX, Compass, Navigation, Trophy } from 'lucide-react';
 
 export const GameHUD: React.FC = () => {
   const {
@@ -88,23 +88,48 @@ export const GameHUD: React.FC = () => {
         </div>
 
         {/* Sim Clock */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 10,
-            background: 'rgba(15, 23, 42, 0.75)',
-            backdropFilter: 'blur(8px)',
-            border: '1px solid rgba(148, 163, 184, 0.25)',
-            borderRadius: 12,
-            padding: '8px 16px',
-            color: '#f8fafc',
-          }}
-        >
-          <Clock size={16} color="#38bdf8" />
-          <span style={{ fontSize: 15, fontFamily: 'monospace', fontWeight: 600, letterSpacing: '0.05em' }}>
-            {formatTime(simClockMins)}
-          </span>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+              background: 'rgba(15, 23, 42, 0.75)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(148, 163, 184, 0.25)',
+              borderRadius: 12,
+              padding: '8px 16px',
+              color: '#f8fafc',
+            }}
+          >
+            <Clock size={16} color="#38bdf8" />
+            <span style={{ fontSize: 15, fontFamily: 'monospace', fontWeight: 600, letterSpacing: '0.05em' }}>
+              {formatTime(simClockMins)}
+            </span>
+          </div>
+
+          <button
+            onClick={() => setActiveStation('SCORE_AND_WORST_DAY')}
+            style={{
+              background: 'rgba(15, 23, 42, 0.75)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(251, 191, 36, 0.4)',
+              borderRadius: 12,
+              padding: '8px 14px',
+              color: '#fbbf24',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              fontSize: 12,
+              fontWeight: 700,
+              pointerEvents: 'auto',
+            }}
+            title="View Score, Star Rating & Worst Day Challenges"
+          >
+            <Trophy size={15} />
+            <span>Score & Stars</span>
+          </button>
         </div>
 
         {/* Audio Toggle & Network Status */}

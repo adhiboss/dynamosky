@@ -10,6 +10,8 @@ import {
   validateDispatcherResponse,
   hydrateDispatcherResponse,
   generateFallbackDispatcherResponse,
+  computeWorstDayLeaderboard,
+  evaluateShiftStars,
   toMinutes,
   toHHMM,
 } from '../index';
@@ -242,5 +244,32 @@ describe('Flight Network Dataset & Engine Invariants', () => {
     const hydratedFallback = hydrateDispatcherResponse(fallback, candidates, baseline.metrics, true);
     expect(hydratedFallback.isFallback).toBe(true);
     expect(hydratedFallback.isVerified).toBe(true);
+  });
+
+  it('computes Worst Day challenge leaderboard and evaluates star ratings', () => {
+    const leaderboard = computeWorstDayLeaderboard(dataset);
+    expect(leaderboard.length).toBeGreaterThan(0);
+    expect(leaderboard[0].rank).toBe(1);
+    expect(leaderboard[0].strandedWithoutAction).toBeGreaterThan(0);
+
+    // Test Star rating formula
+    const baseScore = 4000;
+    const parScore = 8000;
+
+    // 0 stars if <= baseline
+    const r0 = evaluateShiftStars(3500, baseScore, parScore);
+    expect(r0.stars).toBe(0);
+
+    // 1 star if beats baseline
+    const r1 = evaluateShiftStars(5000, baseScore, parScore);
+    expect(r1.stars).toBe(1);
+
+    // 2 stars if within 10% of par (>= 7200)
+    const r2 = evaluateShiftStars(7300, baseScore, parScore);
+    expect(r2.stars).toBe(2);
+
+    // 3 stars if matches or beats par (>= 8000)
+    const r3 = evaluateShiftStars(8050, baseScore, parScore);
+    expect(r3.stars).toBe(3);
   });
 });

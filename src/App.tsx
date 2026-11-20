@@ -15,6 +15,7 @@ import { DepartureBoardView } from './components/modals/DepartureBoardView';
 import { GatesStationView } from './components/modals/GatesStationView';
 import { HangarStationView } from './components/modals/HangarStationView';
 import { OpsCenterView } from './components/modals/OpsCenterView';
+import { ScoreAndWorstDayView } from './components/modals/ScoreAndWorstDayView';
 import { useGameStore } from './store/gameStore';
 import { useSimulationStore } from './store/simulationStore';
 import { validateFlightNetwork } from './engine';
@@ -63,6 +64,7 @@ export const App: React.FC = () => {
         {activeStation === 'GATES' && <GatesStationView />}
         {activeStation === 'HANGAR' && <HangarStationView />}
         {activeStation === 'OPS_CENTER' && <OpsCenterView />}
+        {activeStation === 'SCORE_AND_WORST_DAY' && <ScoreAndWorstDayView />}
       </StationModal>
 
       <KeyboardControls map={keyboardMap}>
