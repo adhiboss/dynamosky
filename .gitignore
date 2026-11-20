@@ -2,5 +2,9 @@ node_modules/
 dist/
 _ref/
 *.zip
+*.log
 .env
 .env.local
+.DS_Store
+Thumbs.db
+.system_generated/

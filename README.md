@@ -1,8 +1,59 @@
 # Domino Sky — 3D Open-World Airline Network Crisis Simulator
 
+> **Submission Repository**: [https://github.com/adhiboss/dynamosky.git](https://github.com/adhiboss/dynamosky.git)  
+> **Chosen Vertical**: **Aviation Operations & Airline Crisis Management — Smart Dynamic Dispatch Assistant**  
+> **Repository Size**: **< 1 MB** (Well below the 10 MB limit, strictly procedural low-poly assets)  
+> **Single Branch**: `main`
+
 **Domino Sky** is a complete, gamified 3D open-world airline operations and crisis simulation game built with **React Three Fiber, Rapier Physics, ecctrl, Zustand, and TypeScript**.
 
-You step into the boots of an airline network controller walking freely around a procedural 3D international airport hub. When an emergency strikes, you climb the control tower, declare airspace closures (e.g. Mumbai Monsoon Cloudburst, 90 minutes), and watch real-time delay cascades ripple across India's 16-airport network. You investigate causal delay chains at the departure board, observe passenger crowds surging at boarding gates, and head to the Operations Centre where an autonomous AI dispatcher proposes tactical recovery actions (standby aircraft assignments, flight cancellations, tail swaps). Approve or reject recovery plans, observe the 3D world update in real-time, and earn your star rating!
+You step into the boots of an airline network operations controller walking freely around a procedural 3D international airport hub. When an emergency strikes, you climb the control tower, declare airspace closures (e.g. Mumbai Monsoon Cloudburst, 90 minutes), and watch real-time delay cascades ripple across India's 16-airport network. You investigate causal delay chains at the departure board, observe passenger crowds surging at boarding gates, and head to the Operations Centre where an autonomous AI dispatcher proposes tactical recovery actions (standby aircraft assignments, flight cancellations, tail swaps). Approve or reject recovery plans, observe the 3D world update in real-time, and earn your star rating!
+
+---
+
+## Challenge Expectations & Solution Architecture
+
+### 1. Chosen Vertical
+**Aviation Operations & Crisis Management (Airline Operations Control Centre - OCC)**  
+Modern airlines operate complex, highly coupled networks where an isolated weather closure at a primary hub (e.g. Mumbai BOM or Delhi DEL) causes compounding domino delays, crew timeouts, and stranded passenger bottlenecks across the country. Domino Sky places the player in command of an OCC with a smart, contextual AI Dispatcher assistant.
+
+### 2. Approach & Core Logic
+- **Pure Deterministic Simulation Engine (`/src/engine`)**: Completely decoupled from React and Three.js with zero UI dependencies, ensuring 100% testability and mathematical reproducibility.
+- **Domino Delay Propagation**: Simulates 16 airports, 70 scheduled flights across 16 aircraft tails, 21 transfer passenger connections, 16 flight crews, and 2 base spare aircraft.
+- **Delay Attribution Decomposition**: Breaks every late arrival down into exact causes: closure hold, reopening queue hold, upstream knock-on delay, crew duty limits, and turnaround slack absorption ($\sum \text{attribution} = \text{total delay}$).
+- **Non-Double-Counting Passenger Accounting**: Stranded passenger counts accurately combine passengers on cancelled flights and passengers on missed connections without double-counting.
+- **Zero AI Math Guarantee**: The AI Dispatcher never computes or manipulates numbers. The engine simulates candidate recovery plans, ranks them by objective metrics, and passes them to the AI. The AI provides tactical briefings using structured placeholders (`{{stranded_before}}`, `{{stranded_after}}`, `{{delay_saved}}`), strictly validated before rendering with a certified deterministic offline fallback.
+
+### 3. How the Solution Works
+1. **Explore the 3D Airport**: Walk the active apron, terminal concourse, boarding gates, maintenance hangar, and control tower in third-person (`W/A/S/D`, mouse look, `Shift` sprint).
+2. **Trigger Airspace Closure**: Interact (`E`) with the Control Tower console and choose a crisis window or scripted preset (Mumbai Cloudburst, Delhi Fog, Bengaluru Storm, or custom parameters).
+3. **Witness the Network Cascade**: The 3D world shifts dynamically—storm clouds roll in, rain and lightning envelop the closed airport, and the central 3D Network Hologram updates in real-time with flight arcs and status glows (amber/red delays, grey cancellations).
+4. **Root-Cause Investigation**: Visit the Terminal Departure Boards to inspect flights and click any delayed flight to inspect its full causal decomposition chain.
+5. **AI Dispatcher Recovery**: Visit the Operations Centre where the AI Dispatcher suggests optimal multi-action recovery plans (spares, cancellations, swaps). Review before/after operational impacts and approve or reject actions.
+6. **Live World Updates**: Approving recovery plans clears grounded flights, shrinks passenger crowds at gates, and restores connections.
+7. **Score & Stars Evaluation**: The game scores your shift against the engine's Par Target to award 1 to 3 stars.
+
+---
+
+## Evaluation Focus Areas
+
+| Focus Area | Implementation Highlights |
+|---|---|
+| **Code Quality** | Strict modular TypeScript architecture; engine pure logic in `/src/engine`; zero circular dependencies; comprehensive typed interfaces; clean component separation. |
+| **Security** | Zero AI Math verification guarantees the AI cannot hallucinate operational numbers; API keys are held strictly server-side in the backend proxy (`vite.config.ts`) and never leaked to client bundles; regex validation rejects raw unverified digits; 100% safe deterministic offline fallback. |
+| **Efficiency** | Repository size is **0.56 MB** (< 10 MB limit); zero external heavy 3D mesh downloads; all aircraft, buildings, vehicles, and crowds are procedurally generated low-poly geometry; GPU instancing for crowds and weather particles; 60 FPS performance target. |
+| **Testing** | 10 comprehensive Vitest unit tests verifying dataset invariants, delay attribution exact sums, non-double-counting of stranded passengers, Mumbai monsoon hand-calculated baseline, recovery rankings, and deterministic repeatability. |
+| **Accessibility** | High-contrast UI theme with clear visual hierarchy; keyboard shortcuts with persistent HUD legend; audio toggle for synthesized procedural sound effects; responsive modals with `Esc` quick-close; clear station beacons with contextual `[E]` prompts. |
+| **Problem Alignment** | Direct, comprehensive realization of the Domino Sky game: 3D open-world airport, 16-node hologram, time scrubber, causal attribution, AI dispatcher recovery, and gamified star scoring. |
+
+---
+
+## Assumptions Made
+For complete details, see [`ASSUMPTIONS.md`](./ASSUMPTIONS.md). Key operational assumptions include:
+- **Holding vs Diverting**: Flights destined for a closed airport hold on ground at their origin rather than diverting airborne, preserving deterministic fleet locations.
+- **Airport Runway Capacity**: Reopening queue uses single-runway sequencing sharing arrivals and departures with $(60 / \text{capacity\_per\_hour})$ minute spacing.
+- **Standby Aircraft & Crew**: Spare aircraft (VT-SPR1 at BOM, VT-SPR2 at DEL) include fresh standby crews ($600$ min max duty).
+- **Attribution Invariance**: Scheduled slack above the 30-minute minimum turnaround absorbs upstream knock-on delay without transferring to subsequent legs.
 
 ---
 
