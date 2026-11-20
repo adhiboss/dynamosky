@@ -1,0 +1,1398 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "description": "Domino Sky Pan-India 16-Airport Airline Schedule Network",
+    "min_turnaround_minutes": 30,
+    "timezone": "IST",
+    "aircraft_capacity": 180,
+    "network_date": "2026-11-20"
+  },
+  "airports": [
+    {
+      "id": "BOM",
+      "name": "Chhatrapati Shivaji Maharaj Intl",
+      "city": "Mumbai",
+      "lat": 19.0896,
+      "lng": 72.8656,
+      "tier": 1,
+      "capacity_per_hour": 36
+    },
+    {
+      "id": "DEL",
+      "name": "Indira Gandhi Intl",
+      "city": "Delhi",
+      "lat": 28.5562,
+      "lng": 77.1,
+      "tier": 1,
+      "capacity_per_hour": 40
+    },
+    {
+      "id": "BLR",
+      "name": "Kempegowda Intl",
+      "city": "Bengaluru",
+      "lat": 13.1986,
+      "lng": 77.7066,
+      "tier": 1,
+      "capacity_per_hour": 32
+    },
+    {
+      "id": "HYD",
+      "name": "Rajiv Gandhi Intl",
+      "city": "Hyderabad",
+      "lat": 17.2403,
+      "lng": 78.4294,
+      "tier": 1,
+      "capacity_per_hour": 30
+    },
+    {
+      "id": "MAA",
+      "name": "Chennai Intl",
+      "city": "Chennai",
+      "lat": 12.9941,
+      "lng": 80.1709,
+      "tier": 1,
+      "capacity_per_hour": 28
+    },
+    {
+      "id": "CCU",
+      "name": "Netaji Subhash Chandra Bose Intl",
+      "city": "Kolkata",
+      "lat": 22.6547,
+      "lng": 88.4467,
+      "tier": 1,
+      "capacity_per_hour": 26
+    },
+    {
+      "id": "AMD",
+      "name": "Sardar Vallabhbhai Patel Intl",
+      "city": "Ahmedabad",
+      "lat": 23.0734,
+      "lng": 72.6347,
+      "tier": 2,
+      "capacity_per_hour": 20
+    },
+    {
+      "id": "PNQ",
+      "name": "Pune Intl",
+      "city": "Pune",
+      "lat": 18.5821,
+      "lng": 73.9197,
+      "tier": 2,
+      "capacity_per_hour": 18
+    },
+    {
+      "id": "GOI",
+      "name": "Dabolim Intl",
+      "city": "Goa",
+      "lat": 15.3808,
+      "lng": 73.8314,
+      "tier": 2,
+      "capacity_per_hour": 18
+    },
+    {
+      "id": "COK",
+      "name": "Cochin Intl",
+      "city": "Kochi",
+      "lat": 10.152,
+      "lng": 76.4019,
+      "tier": 2,
+      "capacity_per_hour": 18
+    },
+    {
+      "id": "JAI",
+      "name": "Jaipur Intl",
+      "city": "Jaipur",
+      "lat": 26.8242,
+      "lng": 75.8122,
+      "tier": 2,
+      "capacity_per_hour": 16
+    },
+    {
+      "id": "LKO",
+      "name": "Chaudhary Charan Singh Intl",
+      "city": "Lucknow",
+      "lat": 26.7606,
+      "lng": 80.8893,
+      "tier": 2,
+      "capacity_per_hour": 16
+    },
+    {
+      "id": "GAU",
+      "name": "Lokpriya Gopinath Bordoloi Intl",
+      "city": "Guwahati",
+      "lat": 26.1061,
+      "lng": 91.5859,
+      "tier": 2,
+      "capacity_per_hour": 14
+    },
+    {
+      "id": "PAT",
+      "name": "Jay Prakash Narayan Intl",
+      "city": "Patna",
+      "lat": 25.5913,
+      "lng": 85.088,
+      "tier": 3,
+      "capacity_per_hour": 12
+    },
+    {
+      "id": "IXC",
+      "name": "Shaheed Bhagat Singh Intl",
+      "city": "Chandigarh",
+      "lat": 30.6735,
+      "lng": 76.7885,
+      "tier": 3,
+      "capacity_per_hour": 12
+    },
+    {
+      "id": "TRV",
+      "name": "Thiruvananthapuram Intl",
+      "city": "Trivandrum",
+      "lat": 8.4821,
+      "lng": 76.92,
+      "tier": 3,
+      "capacity_per_hour": 12
+    }
+  ],
+  "flights": [
+    {
+      "flight_id": "DS101",
+      "tail_id": "VT-AAA",
+      "leg_order": 1,
+      "origin": "BOM",
+      "destination": "DEL",
+      "dep": "06:00",
+      "arr": "08:10",
+      "block_minutes": 130,
+      "pax": 168,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS102",
+      "tail_id": "VT-AAA",
+      "leg_order": 2,
+      "origin": "DEL",
+      "destination": "BOM",
+      "dep": "09:00",
+      "arr": "11:10",
+      "block_minutes": 130,
+      "pax": 172,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS103",
+      "tail_id": "VT-AAA",
+      "leg_order": 3,
+      "origin": "BOM",
+      "destination": "BLR",
+      "dep": "12:00",
+      "arr": "13:40",
+      "block_minutes": 100,
+      "pax": 164,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS104",
+      "tail_id": "VT-AAA",
+      "leg_order": 4,
+      "origin": "BLR",
+      "destination": "BOM",
+      "dep": "14:30",
+      "arr": "16:10",
+      "block_minutes": 100,
+      "pax": 155,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS105",
+      "tail_id": "VT-AAA",
+      "leg_order": 5,
+      "origin": "BOM",
+      "destination": "GOI",
+      "dep": "17:00",
+      "arr": "18:05",
+      "block_minutes": 65,
+      "pax": 170,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS106",
+      "tail_id": "VT-AAB",
+      "leg_order": 1,
+      "origin": "BOM",
+      "destination": "BLR",
+      "dep": "06:30",
+      "arr": "08:10",
+      "block_minutes": 100,
+      "pax": 160,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS107",
+      "tail_id": "VT-AAB",
+      "leg_order": 2,
+      "origin": "BLR",
+      "destination": "DEL",
+      "dep": "09:00",
+      "arr": "11:45",
+      "block_minutes": 165,
+      "pax": 175,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS108",
+      "tail_id": "VT-AAB",
+      "leg_order": 3,
+      "origin": "DEL",
+      "destination": "BOM",
+      "dep": "12:40",
+      "arr": "14:50",
+      "block_minutes": 130,
+      "pax": 166,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS109",
+      "tail_id": "VT-AAB",
+      "leg_order": 4,
+      "origin": "BOM",
+      "destination": "AMD",
+      "dep": "15:50",
+      "arr": "17:00",
+      "block_minutes": 70,
+      "pax": 152,
+      "turnaround_before_min": 60
+    },
+    {
+      "flight_id": "DS110",
+      "tail_id": "VT-AAB",
+      "leg_order": 5,
+      "origin": "AMD",
+      "destination": "BOM",
+      "dep": "17:50",
+      "arr": "19:00",
+      "block_minutes": 70,
+      "pax": 158,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS111",
+      "tail_id": "VT-AAC",
+      "leg_order": 1,
+      "origin": "DEL",
+      "destination": "BOM",
+      "dep": "06:15",
+      "arr": "08:25",
+      "block_minutes": 130,
+      "pax": 170,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS112",
+      "tail_id": "VT-AAC",
+      "leg_order": 2,
+      "origin": "BOM",
+      "destination": "DEL",
+      "dep": "09:20",
+      "arr": "11:30",
+      "block_minutes": 130,
+      "pax": 165,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS113",
+      "tail_id": "VT-AAC",
+      "leg_order": 3,
+      "origin": "DEL",
+      "destination": "CCU",
+      "dep": "12:25",
+      "arr": "14:35",
+      "block_minutes": 130,
+      "pax": 158,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS114",
+      "tail_id": "VT-AAC",
+      "leg_order": 4,
+      "origin": "CCU",
+      "destination": "DEL",
+      "dep": "15:35",
+      "arr": "17:45",
+      "block_minutes": 130,
+      "pax": 162,
+      "turnaround_before_min": 60
+    },
+    {
+      "flight_id": "DS115",
+      "tail_id": "VT-AAC",
+      "leg_order": 5,
+      "origin": "DEL",
+      "destination": "IXC",
+      "dep": "18:45",
+      "arr": "19:40",
+      "block_minutes": 55,
+      "pax": 140,
+      "turnaround_before_min": 60
+    },
+    {
+      "flight_id": "DS116",
+      "tail_id": "VT-AAD",
+      "leg_order": 1,
+      "origin": "DEL",
+      "destination": "BLR",
+      "dep": "06:35",
+      "arr": "09:20",
+      "block_minutes": 165,
+      "pax": 174,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS117",
+      "tail_id": "VT-AAD",
+      "leg_order": 2,
+      "origin": "BLR",
+      "destination": "BOM",
+      "dep": "10:10",
+      "arr": "11:50",
+      "block_minutes": 100,
+      "pax": 168,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS118",
+      "tail_id": "VT-AAD",
+      "leg_order": 3,
+      "origin": "BOM",
+      "destination": "HYD",
+      "dep": "12:40",
+      "arr": "14:05",
+      "block_minutes": 85,
+      "pax": 150,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS119",
+      "tail_id": "VT-AAD",
+      "leg_order": 4,
+      "origin": "HYD",
+      "destination": "BOM",
+      "dep": "14:55",
+      "arr": "16:20",
+      "block_minutes": 85,
+      "pax": 162,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS120",
+      "tail_id": "VT-AAD",
+      "leg_order": 5,
+      "origin": "BOM",
+      "destination": "DEL",
+      "dep": "17:10",
+      "arr": "19:20",
+      "block_minutes": 130,
+      "pax": 175,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS121",
+      "tail_id": "VT-AAE",
+      "leg_order": 1,
+      "origin": "BOM",
+      "destination": "HYD",
+      "dep": "06:50",
+      "arr": "08:15",
+      "block_minutes": 85,
+      "pax": 155,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS122",
+      "tail_id": "VT-AAE",
+      "leg_order": 2,
+      "origin": "HYD",
+      "destination": "DEL",
+      "dep": "09:05",
+      "arr": "11:20",
+      "block_minutes": 135,
+      "pax": 165,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS123",
+      "tail_id": "VT-AAE",
+      "leg_order": 3,
+      "origin": "DEL",
+      "destination": "BOM",
+      "dep": "12:10",
+      "arr": "14:20",
+      "block_minutes": 130,
+      "pax": 170,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS124",
+      "tail_id": "VT-AAE",
+      "leg_order": 4,
+      "origin": "BOM",
+      "destination": "COK",
+      "dep": "15:15",
+      "arr": "17:05",
+      "block_minutes": 110,
+      "pax": 158,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS125",
+      "tail_id": "VT-AAE",
+      "leg_order": 5,
+      "origin": "COK",
+      "destination": "BOM",
+      "dep": "18:00",
+      "arr": "19:50",
+      "block_minutes": 110,
+      "pax": 160,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS126",
+      "tail_id": "VT-AAF",
+      "leg_order": 1,
+      "origin": "BLR",
+      "destination": "BOM",
+      "dep": "06:25",
+      "arr": "08:05",
+      "block_minutes": 100,
+      "pax": 162,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS127",
+      "tail_id": "VT-AAF",
+      "leg_order": 2,
+      "origin": "BOM",
+      "destination": "CCU",
+      "dep": "09:00",
+      "arr": "11:40",
+      "block_minutes": 160,
+      "pax": 170,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS128",
+      "tail_id": "VT-AAF",
+      "leg_order": 3,
+      "origin": "CCU",
+      "destination": "BOM",
+      "dep": "12:35",
+      "arr": "15:15",
+      "block_minutes": 160,
+      "pax": 166,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS129",
+      "tail_id": "VT-AAF",
+      "leg_order": 4,
+      "origin": "BOM",
+      "destination": "MAA",
+      "dep": "16:10",
+      "arr": "18:05",
+      "block_minutes": 115,
+      "pax": 152,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS130",
+      "tail_id": "VT-AAF",
+      "leg_order": 5,
+      "origin": "MAA",
+      "destination": "BOM",
+      "dep": "19:00",
+      "arr": "20:55",
+      "block_minutes": 115,
+      "pax": 148,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS131",
+      "tail_id": "VT-AAG",
+      "leg_order": 1,
+      "origin": "BOM",
+      "destination": "MAA",
+      "dep": "07:00",
+      "arr": "08:55",
+      "block_minutes": 115,
+      "pax": 160,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS132",
+      "tail_id": "VT-AAG",
+      "leg_order": 2,
+      "origin": "MAA",
+      "destination": "BOM",
+      "dep": "09:50",
+      "arr": "11:45",
+      "block_minutes": 115,
+      "pax": 158,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS133",
+      "tail_id": "VT-AAG",
+      "leg_order": 3,
+      "origin": "BOM",
+      "destination": "DEL",
+      "dep": "12:40",
+      "arr": "14:50",
+      "block_minutes": 130,
+      "pax": 172,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS134",
+      "tail_id": "VT-AAG",
+      "leg_order": 4,
+      "origin": "DEL",
+      "destination": "BOM",
+      "dep": "15:50",
+      "arr": "18:00",
+      "block_minutes": 130,
+      "pax": 169,
+      "turnaround_before_min": 60
+    },
+    {
+      "flight_id": "DS135",
+      "tail_id": "VT-AAH",
+      "leg_order": 1,
+      "origin": "DEL",
+      "destination": "HYD",
+      "dep": "06:45",
+      "arr": "09:00",
+      "block_minutes": 135,
+      "pax": 165,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS136",
+      "tail_id": "VT-AAH",
+      "leg_order": 2,
+      "origin": "HYD",
+      "destination": "BOM",
+      "dep": "09:50",
+      "arr": "11:15",
+      "block_minutes": 85,
+      "pax": 159,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS137",
+      "tail_id": "VT-AAH",
+      "leg_order": 3,
+      "origin": "BOM",
+      "destination": "DEL",
+      "dep": "12:10",
+      "arr": "14:20",
+      "block_minutes": 130,
+      "pax": 174,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS138",
+      "tail_id": "VT-AAH",
+      "leg_order": 4,
+      "origin": "DEL",
+      "destination": "LKO",
+      "dep": "15:20",
+      "arr": "16:25",
+      "block_minutes": 65,
+      "pax": 145,
+      "turnaround_before_min": 60
+    },
+    {
+      "flight_id": "DS139",
+      "tail_id": "VT-AAI",
+      "leg_order": 1,
+      "origin": "BOM",
+      "destination": "GOI",
+      "dep": "07:10",
+      "arr": "08:15",
+      "block_minutes": 65,
+      "pax": 164,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS140",
+      "tail_id": "VT-AAI",
+      "leg_order": 2,
+      "origin": "GOI",
+      "destination": "BOM",
+      "dep": "09:05",
+      "arr": "10:10",
+      "block_minutes": 65,
+      "pax": 162,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS141",
+      "tail_id": "VT-AAI",
+      "leg_order": 3,
+      "origin": "BOM",
+      "destination": "DEL",
+      "dep": "11:05",
+      "arr": "13:15",
+      "block_minutes": 130,
+      "pax": 170,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS142",
+      "tail_id": "VT-AAI",
+      "leg_order": 4,
+      "origin": "DEL",
+      "destination": "PAT",
+      "dep": "14:10",
+      "arr": "15:45",
+      "block_minutes": 95,
+      "pax": 150,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS143",
+      "tail_id": "VT-AAJ",
+      "leg_order": 1,
+      "origin": "BLR",
+      "destination": "HYD",
+      "dep": "07:20",
+      "arr": "08:25",
+      "block_minutes": 65,
+      "pax": 150,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS144",
+      "tail_id": "VT-AAJ",
+      "leg_order": 2,
+      "origin": "HYD",
+      "destination": "BOM",
+      "dep": "09:15",
+      "arr": "10:40",
+      "block_minutes": 85,
+      "pax": 162,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS145",
+      "tail_id": "VT-AAJ",
+      "leg_order": 3,
+      "origin": "BOM",
+      "destination": "BLR",
+      "dep": "11:30",
+      "arr": "13:10",
+      "block_minutes": 100,
+      "pax": 165,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS146",
+      "tail_id": "VT-AAJ",
+      "leg_order": 4,
+      "origin": "BLR",
+      "destination": "TRV",
+      "dep": "14:00",
+      "arr": "15:15",
+      "block_minutes": 75,
+      "pax": 140,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS147",
+      "tail_id": "VT-AAK",
+      "leg_order": 1,
+      "origin": "BOM",
+      "destination": "COK",
+      "dep": "07:30",
+      "arr": "09:20",
+      "block_minutes": 110,
+      "pax": 166,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS148",
+      "tail_id": "VT-AAK",
+      "leg_order": 2,
+      "origin": "COK",
+      "destination": "BOM",
+      "dep": "10:15",
+      "arr": "12:05",
+      "block_minutes": 110,
+      "pax": 163,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS149",
+      "tail_id": "VT-AAK",
+      "leg_order": 3,
+      "origin": "BOM",
+      "destination": "JAI",
+      "dep": "13:00",
+      "arr": "14:35",
+      "block_minutes": 95,
+      "pax": 154,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS150",
+      "tail_id": "VT-AAK",
+      "leg_order": 4,
+      "origin": "JAI",
+      "destination": "BOM",
+      "dep": "15:25",
+      "arr": "17:00",
+      "block_minutes": 95,
+      "pax": 152,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS151",
+      "tail_id": "VT-AAL",
+      "leg_order": 1,
+      "origin": "DEL",
+      "destination": "AMD",
+      "dep": "07:40",
+      "arr": "09:10",
+      "block_minutes": 90,
+      "pax": 160,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS152",
+      "tail_id": "VT-AAL",
+      "leg_order": 2,
+      "origin": "AMD",
+      "destination": "DEL",
+      "dep": "10:00",
+      "arr": "11:30",
+      "block_minutes": 90,
+      "pax": 158,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS153",
+      "tail_id": "VT-AAL",
+      "leg_order": 3,
+      "origin": "DEL",
+      "destination": "BOM",
+      "dep": "12:25",
+      "arr": "14:35",
+      "block_minutes": 130,
+      "pax": 175,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS154",
+      "tail_id": "VT-AAL",
+      "leg_order": 4,
+      "origin": "BOM",
+      "destination": "PNQ",
+      "dep": "15:30",
+      "arr": "16:20",
+      "block_minutes": 50,
+      "pax": 145,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS155",
+      "tail_id": "VT-AAM",
+      "leg_order": 1,
+      "origin": "CCU",
+      "destination": "GAU",
+      "dep": "07:00",
+      "arr": "08:10",
+      "block_minutes": 70,
+      "pax": 148,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS156",
+      "tail_id": "VT-AAM",
+      "leg_order": 2,
+      "origin": "GAU",
+      "destination": "CCU",
+      "dep": "09:00",
+      "arr": "10:10",
+      "block_minutes": 70,
+      "pax": 150,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS157",
+      "tail_id": "VT-AAM",
+      "leg_order": 3,
+      "origin": "CCU",
+      "destination": "BOM",
+      "dep": "11:00",
+      "arr": "13:40",
+      "block_minutes": 160,
+      "pax": 168,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS158",
+      "tail_id": "VT-AAM",
+      "leg_order": 4,
+      "origin": "BOM",
+      "destination": "CCU",
+      "dep": "14:30",
+      "arr": "17:10",
+      "block_minutes": 160,
+      "pax": 166,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS159",
+      "tail_id": "VT-AAN",
+      "leg_order": 1,
+      "origin": "HYD",
+      "destination": "MAA",
+      "dep": "07:10",
+      "arr": "08:20",
+      "block_minutes": 70,
+      "pax": 152,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS160",
+      "tail_id": "VT-AAN",
+      "leg_order": 2,
+      "origin": "MAA",
+      "destination": "HYD",
+      "dep": "09:10",
+      "arr": "10:20",
+      "block_minutes": 70,
+      "pax": 155,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS161",
+      "tail_id": "VT-AAN",
+      "leg_order": 3,
+      "origin": "HYD",
+      "destination": "BOM",
+      "dep": "11:10",
+      "arr": "12:35",
+      "block_minutes": 85,
+      "pax": 164,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS162",
+      "tail_id": "VT-AAN",
+      "leg_order": 4,
+      "origin": "BOM",
+      "destination": "HYD",
+      "dep": "13:30",
+      "arr": "14:55",
+      "block_minutes": 85,
+      "pax": 160,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS163",
+      "tail_id": "VT-AAO",
+      "leg_order": 1,
+      "origin": "DEL",
+      "destination": "GAU",
+      "dep": "07:20",
+      "arr": "09:50",
+      "block_minutes": 150,
+      "pax": 162,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS164",
+      "tail_id": "VT-AAO",
+      "leg_order": 2,
+      "origin": "GAU",
+      "destination": "DEL",
+      "dep": "10:40",
+      "arr": "13:10",
+      "block_minutes": 150,
+      "pax": 165,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS165",
+      "tail_id": "VT-AAO",
+      "leg_order": 3,
+      "origin": "DEL",
+      "destination": "BOM",
+      "dep": "14:05",
+      "arr": "16:15",
+      "block_minutes": 130,
+      "pax": 173,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS166",
+      "tail_id": "VT-AAO",
+      "leg_order": 4,
+      "origin": "BOM",
+      "destination": "BLR",
+      "dep": "17:10",
+      "arr": "18:50",
+      "block_minutes": 100,
+      "pax": 158,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS167",
+      "tail_id": "VT-AAP",
+      "leg_order": 1,
+      "origin": "BOM",
+      "destination": "PNQ",
+      "dep": "07:50",
+      "arr": "08:40",
+      "block_minutes": 50,
+      "pax": 142,
+      "turnaround_before_min": 0
+    },
+    {
+      "flight_id": "DS168",
+      "tail_id": "VT-AAP",
+      "leg_order": 2,
+      "origin": "PNQ",
+      "destination": "BOM",
+      "dep": "09:30",
+      "arr": "10:20",
+      "block_minutes": 50,
+      "pax": 146,
+      "turnaround_before_min": 50
+    },
+    {
+      "flight_id": "DS169",
+      "tail_id": "VT-AAP",
+      "leg_order": 3,
+      "origin": "BOM",
+      "destination": "DEL",
+      "dep": "11:15",
+      "arr": "13:25",
+      "block_minutes": 130,
+      "pax": 175,
+      "turnaround_before_min": 55
+    },
+    {
+      "flight_id": "DS170",
+      "tail_id": "VT-AAP",
+      "leg_order": 4,
+      "origin": "DEL",
+      "destination": "BOM",
+      "dep": "14:20",
+      "arr": "16:30",
+      "block_minutes": 130,
+      "pax": 170,
+      "turnaround_before_min": 55
+    }
+  ],
+  "connections": [
+    {
+      "connection_id": "CN-001",
+      "airport": "BOM",
+      "from_flight": "DS136",
+      "to_flight": "DS103",
+      "passengers": 24,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-002",
+      "airport": "BOM",
+      "from_flight": "DS165",
+      "to_flight": "DS105",
+      "passengers": 18,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-003",
+      "airport": "BOM",
+      "from_flight": "DS168",
+      "to_flight": "DS141",
+      "passengers": 22,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-004",
+      "airport": "BOM",
+      "from_flight": "DS117",
+      "to_flight": "DS133",
+      "passengers": 19,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-005",
+      "airport": "BOM",
+      "from_flight": "DS119",
+      "to_flight": "DS166",
+      "passengers": 25,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-006",
+      "airport": "BOM",
+      "from_flight": "DS132",
+      "to_flight": "DS118",
+      "passengers": 17,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-007",
+      "airport": "BOM",
+      "from_flight": "DS165",
+      "to_flight": "DS120",
+      "passengers": 21,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-008",
+      "airport": "BOM",
+      "from_flight": "DS102",
+      "to_flight": "DS137",
+      "passengers": 16,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-009",
+      "airport": "DEL",
+      "from_flight": "DS169",
+      "to_flight": "DS142",
+      "passengers": 20,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-010",
+      "airport": "DEL",
+      "from_flight": "DS141",
+      "to_flight": "DS165",
+      "passengers": 23,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-011",
+      "airport": "DEL",
+      "from_flight": "DS112",
+      "to_flight": "DS153",
+      "passengers": 18,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-012",
+      "airport": "DEL",
+      "from_flight": "DS152",
+      "to_flight": "DS113",
+      "passengers": 26,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-013",
+      "airport": "DEL",
+      "from_flight": "DS164",
+      "to_flight": "DS142",
+      "passengers": 15,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-014",
+      "airport": "DEL",
+      "from_flight": "DS122",
+      "to_flight": "DS113",
+      "passengers": 22,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-015",
+      "airport": "DEL",
+      "from_flight": "DS122",
+      "to_flight": "DS153",
+      "passengers": 19,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-016",
+      "airport": "DEL",
+      "from_flight": "DS141",
+      "to_flight": "DS170",
+      "passengers": 21,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-017",
+      "airport": "HYD",
+      "from_flight": "DS121",
+      "to_flight": "DS144",
+      "passengers": 24,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-018",
+      "airport": "BLR",
+      "from_flight": "DS145",
+      "to_flight": "DS104",
+      "passengers": 18,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-019",
+      "airport": "HYD",
+      "from_flight": "DS143",
+      "to_flight": "DS136",
+      "passengers": 20,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-020",
+      "airport": "MAA",
+      "from_flight": "DS159",
+      "to_flight": "DS132",
+      "passengers": 16,
+      "min_connect_minutes": 45
+    },
+    {
+      "connection_id": "CN-021",
+      "airport": "HYD",
+      "from_flight": "DS121",
+      "to_flight": "DS136",
+      "passengers": 25,
+      "min_connect_minutes": 45
+    }
+  ],
+  "crews": [
+    {
+      "crew_id": "CRW-AAA",
+      "tail_id": "VT-AAA",
+      "base": "BOM",
+      "duty_start": "05:30",
+      "max_duty_mins": 860,
+      "flight_ids": [
+        "DS101",
+        "DS102",
+        "DS103",
+        "DS104",
+        "DS105"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAB",
+      "tail_id": "VT-AAB",
+      "base": "BOM",
+      "duty_start": "05:45",
+      "max_duty_mins": 900,
+      "flight_ids": [
+        "DS106",
+        "DS107",
+        "DS108",
+        "DS109",
+        "DS110"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAC",
+      "tail_id": "VT-AAC",
+      "base": "DEL",
+      "duty_start": "05:30",
+      "max_duty_mins": 955,
+      "flight_ids": [
+        "DS111",
+        "DS112",
+        "DS113",
+        "DS114",
+        "DS115"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAD",
+      "tail_id": "VT-AAD",
+      "base": "DEL",
+      "duty_start": "05:50",
+      "max_duty_mins": 915,
+      "flight_ids": [
+        "DS116",
+        "DS117",
+        "DS118",
+        "DS119",
+        "DS120"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAE",
+      "tail_id": "VT-AAE",
+      "base": "BOM",
+      "duty_start": "06:00",
+      "max_duty_mins": 935,
+      "flight_ids": [
+        "DS121",
+        "DS122",
+        "DS123",
+        "DS124",
+        "DS125"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAF",
+      "tail_id": "VT-AAF",
+      "base": "BLR",
+      "duty_start": "05:40",
+      "max_duty_mins": 1020,
+      "flight_ids": [
+        "DS126",
+        "DS127",
+        "DS128",
+        "DS129",
+        "DS130"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAG",
+      "tail_id": "VT-AAG",
+      "base": "BOM",
+      "duty_start": "06:10",
+      "max_duty_mins": 815,
+      "flight_ids": [
+        "DS131",
+        "DS132",
+        "DS133",
+        "DS134"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAH",
+      "tail_id": "VT-AAH",
+      "base": "DEL",
+      "duty_start": "06:00",
+      "max_duty_mins": 730,
+      "flight_ids": [
+        "DS135",
+        "DS136",
+        "DS137",
+        "DS138"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAI",
+      "tail_id": "VT-AAI",
+      "base": "BOM",
+      "duty_start": "06:20",
+      "max_duty_mins": 670,
+      "flight_ids": [
+        "DS139",
+        "DS140",
+        "DS141",
+        "DS142"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAJ",
+      "tail_id": "VT-AAJ",
+      "base": "BLR",
+      "duty_start": "06:30",
+      "max_duty_mins": 660,
+      "flight_ids": [
+        "DS143",
+        "DS144",
+        "DS145",
+        "DS146"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAK",
+      "tail_id": "VT-AAK",
+      "base": "BOM",
+      "duty_start": "06:40",
+      "max_duty_mins": 725,
+      "flight_ids": [
+        "DS147",
+        "DS148",
+        "DS149",
+        "DS150"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAL",
+      "tail_id": "VT-AAL",
+      "base": "DEL",
+      "duty_start": "06:50",
+      "max_duty_mins": 675,
+      "flight_ids": [
+        "DS151",
+        "DS152",
+        "DS153",
+        "DS154"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAM",
+      "tail_id": "VT-AAM",
+      "base": "CCU",
+      "duty_start": "06:10",
+      "max_duty_mins": 765,
+      "flight_ids": [
+        "DS155",
+        "DS156",
+        "DS157",
+        "DS158"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAN",
+      "tail_id": "VT-AAN",
+      "base": "HYD",
+      "duty_start": "06:20",
+      "max_duty_mins": 660,
+      "flight_ids": [
+        "DS159",
+        "DS160",
+        "DS161",
+        "DS162"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAO",
+      "tail_id": "VT-AAO",
+      "base": "DEL",
+      "duty_start": "06:30",
+      "max_duty_mins": 845,
+      "flight_ids": [
+        "DS163",
+        "DS164",
+        "DS165",
+        "DS166"
+      ]
+    },
+    {
+      "crew_id": "CRW-AAP",
+      "tail_id": "VT-AAP",
+      "base": "BOM",
+      "duty_start": "07:00",
+      "max_duty_mins": 675,
+      "flight_ids": [
+        "DS167",
+        "DS168",
+        "DS169",
+        "DS170"
+      ]
+    }
+  ],
+  "spare_aircraft": [
+    {
+      "tail_id": "VT-SPR1",
+      "base": "BOM",
+      "available_from": "06:00",
+      "seats": 180
+    },
+    {
+      "tail_id": "VT-SPR2",
+      "base": "DEL",
+      "available_from": "07:30",
+      "seats": 180
+    }
+  ]
+}
