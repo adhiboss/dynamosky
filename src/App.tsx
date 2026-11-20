@@ -7,6 +7,8 @@ import { GameHUD } from './components/ui/GameHUD';
 import { AirportBuildings } from './components/world/AirportBuildings';
 import { RunwayAndApron } from './components/world/RunwayAndApron';
 import { GroundVehicles } from './components/world/GroundVehicles';
+import { NetworkHologram } from './components/hologram/NetworkHologram';
+import { TimeScrubberHUD } from './components/ui/TimeScrubberHUD';
 import { StationModal } from './components/modals/StationModal';
 import { TowerStationView } from './components/modals/TowerStationView';
 import { DepartureBoardView } from './components/modals/DepartureBoardView';
@@ -51,6 +53,7 @@ export const App: React.FC = () => {
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}>
       <GameHUD />
+      <TimeScrubberHUD />
 
       {/* Station Panel Modal */}
       <StationModal>
@@ -114,6 +117,9 @@ export const App: React.FC = () => {
 
               {/* Procedural Airport Buildings & Stations */}
               <AirportBuildings />
+
+              {/* 3D Network Hologram with Flight Arcs & Moving Aircraft */}
+              <NetworkHologram position={[0, 0.2, 5]} scale={0.85} />
 
               {/* Runway, Apron, and Parked Aircraft */}
               <RunwayAndApron />
