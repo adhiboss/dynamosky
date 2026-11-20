@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useGameStore } from '../../store/gameStore';
+import { audio } from '../../services/audioService';
 import { Clock, Radio, Volume2, VolumeX, Compass, Navigation, Trophy } from 'lucide-react';
 
 export const GameHUD: React.FC = () => {
@@ -28,11 +29,14 @@ export const GameHUD: React.FC = () => {
         if (activeStation) {
           // If already in a station panel, pressing E or Esc can close it
           setActiveStation(null);
+          audio.playClick();
         } else if (nearbyStation) {
           setActiveStation(nearbyStation.id);
+          audio.playAirportChime();
         }
       } else if (e.code === 'Escape' && activeStation) {
         setActiveStation(null);
+        audio.playClick();
       }
     };
 

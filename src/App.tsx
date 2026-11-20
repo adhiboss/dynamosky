@@ -7,6 +7,8 @@ import { GameHUD } from './components/ui/GameHUD';
 import { AirportBuildings } from './components/world/AirportBuildings';
 import { RunwayAndApron } from './components/world/RunwayAndApron';
 import { GroundVehicles } from './components/world/GroundVehicles';
+import { WeatherSystem } from './components/world/WeatherSystem';
+import { PassengerCrowds } from './components/world/PassengerCrowds';
 import { NetworkHologram } from './components/hologram/NetworkHologram';
 import { TimeScrubberHUD } from './components/ui/TimeScrubberHUD';
 import { StationModal } from './components/modals/StationModal';
@@ -73,20 +75,10 @@ export const App: React.FC = () => {
           camera={{ position: [0, 5, 10], fov: 60 }}
           style={{ width: '100%', height: '100%' }}
         >
-          {/* Sky & Atmosphere Lighting */}
+          {/* Sky & Atmosphere Lighting & Procedural Weather */}
           <color attach="background" args={['#0b1329']} />
-          <ambientLight intensity={0.5} />
-          <directionalLight
-            position={[40, 70, 30]}
-            intensity={1.5}
-            castShadow
-            shadow-mapSize={[2048, 2048]}
-            shadow-camera-left={-70}
-            shadow-camera-right={70}
-            shadow-camera-top={70}
-            shadow-camera-bottom={-70}
-            shadow-bias={-0.0005}
-          />
+          <ambientLight intensity={0.4} />
+          <WeatherSystem />
 
           <Suspense fallback={null}>
             <Physics timeStep="vary" gravity={[0, -9.81, 0]}>
@@ -119,6 +111,9 @@ export const App: React.FC = () => {
 
               {/* Runway, Apron, and Parked Aircraft */}
               <RunwayAndApron />
+
+              {/* Dynamic Instanced Passenger Crowds */}
+              <PassengerCrowds />
 
               {/* Ground Vehicles Driving Loops */}
               <GroundVehicles />

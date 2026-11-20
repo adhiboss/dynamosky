@@ -7,6 +7,7 @@ import {
   HydratedDispatcherResponse,
 } from '../../engine';
 import { requestAIDispatcherPlan } from '../../services/aiDispatcherService';
+import { audio } from '../../services/audioService';
 import {
   ShieldCheck,
   Brain,
@@ -71,6 +72,7 @@ export const OpsCenterView: React.FC = () => {
 
   const handleApprove = (action: RecoveryAction) => {
     applyAction(action);
+    audio.playApproveSuccess();
   };
 
   const handleReject = (actionId: string) => {
