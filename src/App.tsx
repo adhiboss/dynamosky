@@ -1,9 +1,10 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Physics, RigidBody } from '@react-three/rapier';
 import { KeyboardControls, Grid } from '@react-three/drei';
 import { ControllerPlayer } from './components/character/ControllerPlayer';
 import { GameHUD } from './components/ui/GameHUD';
+import { IndiaNetworkMap } from './components/ui/IndiaNetworkMap';
 import { ShiftBriefing } from './components/ui/ShiftBriefing';
 import { AirportBuildings } from './components/world/AirportBuildings';
 import { RunwayAndApron } from './components/world/RunwayAndApron';
@@ -36,6 +37,7 @@ const keyboardMap = [
 export const App: React.FC = () => {
   const activeStation = useGameStore((state) => state.activeStation);
   const setDataset = useSimulationStore((state) => state.setDataset);
+  const [datasetError, setDatasetError] = useState<string | null>(null);
 
   // Load and validate flight network dataset at startup
   useEffect(() => {
@@ -47,17 +49,23 @@ export const App: React.FC = () => {
       .then((data) => {
         validateFlightNetwork(data);
         setDataset(data);
-        console.log('Flight network dataset loaded and validated successfully.');
+        setDatasetError(null);
       })
-      .catch((err) => {
-        console.error('Fatal flight network startup validation error:', err);
-        alert(`FATAL DATASET ERROR: ${err.message}`);
+      .catch((err: unknown) => {
+        const message = err instanceof Error ? err.message : 'Flight network failed to load.';
+        setDatasetError(message);
       });
   }, [setDataset]);
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}>
+      {datasetError && (
+        <div role="alert" style={{ position: 'absolute', top: 72, left: 24, right: 24, zIndex: 30, background: '#7f1d1d', color: '#fff', padding: '10px 14px', borderRadius: 10 }}>
+          Flight network could not be loaded: {datasetError}
+        </div>
+      )}
       <GameHUD />
+      <IndiaNetworkMap />
       <TimeScrubberHUD />
       <ShiftBriefing />
 

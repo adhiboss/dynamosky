@@ -75,8 +75,9 @@ export function validateFlightNetwork(data: FlightNetworkData): { valid: boolean
       if (f.block_minutes !== (arrMins - depMins)) {
         errors.push(`Flight ${f.flight_id} block_minutes (${f.block_minutes}) does not equal arr - dep (${arrMins - depMins}).`);
       }
-    } catch (e: any) {
-      errors.push(`Flight ${f.flight_id} invalid time: ${e.message}`);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'unknown time error';
+      errors.push(`Flight ${f.flight_id} invalid time: ${message}`);
     }
 
     if (f.pax > capacity) {

@@ -57,6 +57,8 @@ export const TimeScrubberHUD: React.FC = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <button
+            type="button"
+            aria-label={isClockPlaying ? 'Pause simulation clock' : 'Play simulation clock'}
             onClick={() => setIsClockPlaying(!isClockPlaying)}
             style={{
               background: isClockPlaying ? '#eab308' : '#0284c7',
@@ -77,7 +79,9 @@ export const TimeScrubberHUD: React.FC = () => {
           </button>
 
           <button
-            onClick={() => setSimClockMins(360)} // reset to 06:00
+            type="button"
+            aria-label="Reset clock to 06:00"
+            onClick={() => setSimClockMins(360)}
             title="Reset to 06:00 IST"
             style={{
               background: 'rgba(30, 41, 59, 0.7)',
@@ -96,7 +100,10 @@ export const TimeScrubberHUD: React.FC = () => {
         <div style={{ display: 'flex', gap: 4 }}>
           {speeds.map((s) => (
             <button
+              type="button"
               key={s}
+              aria-label={`Set clock speed to ${s} times`}
+              aria-pressed={clockSpeed === s}
               onClick={() => setClockSpeed(s)}
               style={{
                 background: clockSpeed === s ? '#38bdf8' : 'rgba(30, 41, 59, 0.6)',
@@ -124,6 +131,7 @@ export const TimeScrubberHUD: React.FC = () => {
       <div style={{ position: 'relative', width: '100%', marginTop: 4 }}>
         <input
           type="range"
+          aria-label="Simulation clock"
           min={0}
           max={1440}
           step={5}

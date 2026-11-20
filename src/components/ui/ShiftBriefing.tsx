@@ -52,6 +52,7 @@ export const ShiftBriefing: React.FC = () => {
           <li>Score &amp; Stars — one star beats doing nothing. Three stars match Par.</li>
         </ol>
         <button
+          type="button"
           onClick={dismissBriefing}
           style={{
             background: '#0284c7',

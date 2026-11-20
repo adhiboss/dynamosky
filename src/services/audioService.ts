@@ -6,7 +6,8 @@ class AudioService {
   private getContext(): AudioContext | null {
     if (typeof window === 'undefined') return null;
     if (!this.ctx) {
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      const legacy = window as Window & { webkitAudioContext?: typeof AudioContext };
+      const AudioCtx = window.AudioContext || legacy.webkitAudioContext;
       if (AudioCtx) {
         this.ctx = new AudioCtx();
       }

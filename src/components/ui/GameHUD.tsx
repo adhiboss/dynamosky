@@ -128,6 +128,8 @@ export const GameHUD: React.FC = () => {
           </div>
 
           <button
+            type="button"
+            aria-label="Open score and stars"
             onClick={() => {
               markStationVisited('SCORE_AND_WORST_DAY');
               setActiveStation('SCORE_AND_WORST_DAY');
@@ -164,7 +166,9 @@ export const GameHUD: React.FC = () => {
           }}
         >
           <button
+            type="button"
             onClick={toggleSound}
+            aria-label={soundEnabled ? 'Mute audio' : 'Unmute audio'}
             title={soundEnabled ? 'Mute Audio' : 'Unmute Audio'}
             style={{
               background: 'rgba(15, 23, 42, 0.75)',
@@ -211,6 +215,7 @@ export const GameHUD: React.FC = () => {
       </div>
 
       <div
+        aria-live="polite"
         style={{
           position: 'absolute',
           top: 128,

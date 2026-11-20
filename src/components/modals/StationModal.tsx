@@ -112,6 +112,8 @@ export const StationModal: React.FC<StationModalProps> = ({ children }) => {
           </div>
 
           <button
+            type="button"
+            aria-label="Close station"
             onClick={() => setActiveStation(null)}
             style={{
               background: 'transparent',
