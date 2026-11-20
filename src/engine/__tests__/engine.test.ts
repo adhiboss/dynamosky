@@ -7,6 +7,9 @@ import {
   simulateNetwork,
   generateRecoveryCandidates,
   searchBestRecoveryPlan,
+  validateDispatcherResponse,
+  hydrateDispatcherResponse,
+  generateFallbackDispatcherResponse,
   toMinutes,
   toHHMM,
 } from '../index';
@@ -177,5 +180,67 @@ describe('Flight Network Dataset & Engine Invariants', () => {
     expect(search.finalMetrics.shift_score).toBeGreaterThan(
       simulateNetwork(dataset, closure).metrics.shift_score
     );
+  });
+
+  it('strictly validates AI dispatcher output: rejects digits outside placeholders and hydrates engine values', () => {
+    const closure = {
+      airport: 'BOM',
+      start: 360,
+      end: 450,
+      reason: 'Monsoon Thunderstorm',
+    };
+
+    const candidates = generateRecoveryCandidates(dataset, closure);
+    const baseline = simulateNetwork(dataset, closure);
+
+    // 1. Valid AI response with placeholders and NO bare digits
+    const validRaw = {
+      chosen_action_ids: [candidates[0].action.id],
+      explanation:
+        'Immediate recovery order: Deploying spare to rescue passengers, reducing stranded travelers from {{stranded_before}} down to {{stranded_after}}, saving {{delay_saved}} minutes.',
+    };
+
+    const validCheck = validateDispatcherResponse(validRaw, candidates);
+    expect(validCheck.valid).toBe(true);
+
+    const hydrated = hydrateDispatcherResponse(validRaw, candidates, baseline.metrics);
+    expect(hydrated.isVerified).toBe(true);
+    expect(hydrated.explanation).not.toContain('{{stranded_before}}');
+    expect(hydrated.explanation).toContain(baseline.metrics.stranded_passengers.toLocaleString());
+
+    // 2. Invalid AI response: contains bare digit outside placeholder (Violation!)
+    const invalidWithDigit = {
+      chosen_action_ids: [candidates[0].action.id],
+      explanation: 'We saved 120 minutes of delay by dispatching a spare.',
+    };
+    const invalidCheck1 = validateDispatcherResponse(invalidWithDigit, candidates);
+    expect(invalidCheck1.valid).toBe(false);
+    expect(invalidCheck1.error).toMatch(/raw numbers or digits outside a placeholder/);
+
+    // 3. Invalid AI response: unknown placeholder
+    const invalidWithUnknownPlaceholder = {
+      chosen_action_ids: [candidates[0].action.id],
+      explanation: 'This action saves {{unauthorized_metric_name}} passengers.',
+    };
+    const invalidCheck2 = validateDispatcherResponse(invalidWithUnknownPlaceholder, candidates);
+    expect(invalidCheck2.valid).toBe(false);
+    expect(invalidCheck2.error).toMatch(/Unknown placeholder/);
+
+    // 4. Invalid AI response: invalid action ID not in candidate list
+    const invalidWithFakeAction = {
+      chosen_action_ids: ['ACT-FAKE-ID-999'],
+      explanation: 'Action executed saving {{delay_saved}} minutes.',
+    };
+    const invalidCheck3 = validateDispatcherResponse(invalidWithFakeAction, candidates);
+    expect(invalidCheck3.valid).toBe(false);
+    expect(invalidCheck3.error).toMatch(/not in the valid candidate list/);
+
+    // 5. Deterministic fallback response passes validation cleanly
+    const fallback = generateFallbackDispatcherResponse(candidates, baseline.metrics);
+    const fallbackValidation = validateDispatcherResponse(fallback, candidates);
+    expect(fallbackValidation.valid).toBe(true);
+    const hydratedFallback = hydrateDispatcherResponse(fallback, candidates, baseline.metrics, true);
+    expect(hydratedFallback.isFallback).toBe(true);
+    expect(hydratedFallback.isVerified).toBe(true);
   });
 });

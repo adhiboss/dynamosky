@@ -14,6 +14,7 @@ import { TowerStationView } from './components/modals/TowerStationView';
 import { DepartureBoardView } from './components/modals/DepartureBoardView';
 import { GatesStationView } from './components/modals/GatesStationView';
 import { HangarStationView } from './components/modals/HangarStationView';
+import { OpsCenterView } from './components/modals/OpsCenterView';
 import { useGameStore } from './store/gameStore';
 import { useSimulationStore } from './store/simulationStore';
 import { validateFlightNetwork } from './engine';
@@ -61,14 +62,7 @@ export const App: React.FC = () => {
         {activeStation === 'DEPARTURE_BOARD' && <DepartureBoardView />}
         {activeStation === 'GATES' && <GatesStationView />}
         {activeStation === 'HANGAR' && <HangarStationView />}
-        {activeStation === 'OPS_CENTER' && (
-          <div style={{ color: '#f8fafc', padding: 12 }}>
-            <h3 style={{ fontSize: 18, color: '#10b981', marginBottom: 8 }}>Airline Operations Dispatch</h3>
-            <p style={{ color: '#94a3b8' }}>
-              Autonomous AI recovery planner proposing candidate mitigations verified by the engine.
-            </p>
-          </div>
-        )}
+        {activeStation === 'OPS_CENTER' && <OpsCenterView />}
       </StationModal>
 
       <KeyboardControls map={keyboardMap}>
