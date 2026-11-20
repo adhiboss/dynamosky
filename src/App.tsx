@@ -4,6 +4,7 @@ import { Physics, RigidBody } from '@react-three/rapier';
 import { KeyboardControls, Grid } from '@react-three/drei';
 import { ControllerPlayer } from './components/character/ControllerPlayer';
 import { GameHUD } from './components/ui/GameHUD';
+import { ShiftBriefing } from './components/ui/ShiftBriefing';
 import { AirportBuildings } from './components/world/AirportBuildings';
 import { RunwayAndApron } from './components/world/RunwayAndApron';
 import { GroundVehicles } from './components/world/GroundVehicles';
@@ -58,6 +59,7 @@ export const App: React.FC = () => {
     <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}>
       <GameHUD />
       <TimeScrubberHUD />
+      <ShiftBriefing />
 
       {/* Station Panel Modal */}
       <StationModal>
@@ -76,8 +78,9 @@ export const App: React.FC = () => {
           style={{ width: '100%', height: '100%' }}
         >
           {/* Sky & Atmosphere Lighting & Procedural Weather */}
-          <color attach="background" args={['#0f172a']} />
-          <ambientLight intensity={0.75} />
+          <color attach="background" args={['#7dd3fc']} />
+          <hemisphereLight args={['#e0f2fe', '#334155', 0.55]} />
+          <ambientLight intensity={0.35} />
           <WeatherSystem />
 
           <Suspense fallback={null}>

@@ -32,12 +32,7 @@ export const useSimulationStore = create<SimulationState>((set, get) => ({
     get().recomputeSimulation();
   },
 
-  closure: {
-    airport: 'BOM',
-    start: 360, // 06:00 IST
-    end: 450,   // 07:30 IST (90 min)
-    reason: 'Monsoon Thunderstorm & Convective Cell',
-  },
+  closure: null,
   setClosure: (closure) => {
     set({ closure, appliedActions: [] });
     get().recomputeSimulation();

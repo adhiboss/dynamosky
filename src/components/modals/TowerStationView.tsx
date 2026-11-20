@@ -55,7 +55,7 @@ const PRESETS: Preset[] = [
 
 export const TowerStationView: React.FC = () => {
   const { dataset, closure, setClosure, simResult } = useSimulationStore();
-  const { setCurrentAirportId } = useGameStore();
+  const { setCurrentAirportId, setCurrentObjective } = useGameStore();
 
   const [selectedAirport, setSelectedAirport] = useState<string>(closure?.airport || 'BOM');
   const [startMins, setStartMins] = useState<number>(closure?.start || 360);
@@ -74,6 +74,7 @@ export const TowerStationView: React.FC = () => {
       reason: customReason,
     });
     setCurrentAirportId(selectedAirport);
+    setCurrentObjective('');
   };
 
   const applyPreset = (preset: Preset) => {
@@ -89,10 +90,12 @@ export const TowerStationView: React.FC = () => {
       reason: preset.reason,
     });
     setCurrentAirportId(preset.airport);
+    setCurrentObjective('');
   };
 
   const clearClosure = () => {
     setClosure(null);
+    setCurrentObjective('');
   };
 
   if (!dataset) {

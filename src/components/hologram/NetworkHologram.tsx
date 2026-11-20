@@ -223,7 +223,7 @@ export const NetworkHologram: React.FC<NetworkHologramProps> = ({
             )}
 
             {/* 3D Floating Airport Label */}
-            <Html position={[0, 1.6, 0]} center distanceFactor={18} zIndexRange={[100, 0]}>
+            <Html position={[0, 1.6, 0]} center distanceFactor={18} zIndexRange={[4, 0]}>
               <div
                 style={{
                   background: isClosed

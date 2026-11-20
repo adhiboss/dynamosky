@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
+import { Html } from '@react-three/drei';
 import { useGameStore, StationType } from '../../store/gameStore';
 
 interface StationBeaconProps {
@@ -97,6 +98,25 @@ export const StationBeacon: React.FC<StationBeaconProps> = ({
           <meshBasicMaterial color={color} wireframe transparent opacity={0.4} />
         </mesh>
       </group>
+
+      <Html position={[0, 3.1, 0]} center distanceFactor={18} zIndexRange={[8, 0]} style={{ pointerEvents: 'none' }}>
+        <div
+          style={{
+            color: '#f8fafc',
+            background: 'rgba(15, 23, 42, 0.82)',
+            border: `1px solid ${color}`,
+            borderRadius: 8,
+            padding: '4px 8px',
+            fontSize: 12,
+            fontWeight: 700,
+            letterSpacing: '0.04em',
+            whiteSpace: 'nowrap',
+            textTransform: 'uppercase',
+          }}
+        >
+          {name}
+        </div>
+      </Html>
     </group>
   );
 };

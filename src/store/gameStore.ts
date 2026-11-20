@@ -31,9 +31,14 @@ interface GameState {
   currentAirportId: string;
   setCurrentAirportId: (id: string) => void;
 
-  // Current objective
+  // Current objective override (Worst Day challenges). Empty means the shift script drives the line.
   currentObjective: string;
   setCurrentObjective: (obj: string) => void;
+
+  briefingOpen: boolean;
+  dismissBriefing: () => void;
+  stationsVisited: StationType[];
+  markStationVisited: (id: StationType) => void;
 
   // Audio mute
   soundEnabled: boolean;
@@ -58,8 +63,18 @@ export const useGameStore = create<GameState>((set) => ({
   currentAirportId: 'BOM',
   setCurrentAirportId: (id) => set({ currentAirportId: id }),
 
-  currentObjective: 'Climb the Control Tower to monitor the network or initiate crisis protocols',
+  currentObjective: '',
   setCurrentObjective: (obj) => set({ currentObjective: obj }),
+
+  briefingOpen: true,
+  dismissBriefing: () => set({ briefingOpen: false }),
+  stationsVisited: [],
+  markStationVisited: (id) =>
+    set((state) =>
+      !id || state.stationsVisited.includes(id)
+        ? state
+        : { stationsVisited: [...state.stationsVisited, id] }
+    ),
 
   soundEnabled: true,
   toggleSound: () => set((state) => ({ soundEnabled: !state.soundEnabled })),

@@ -2,6 +2,7 @@ import React from 'react';
 import * as THREE from 'three';
 import { RigidBody } from '@react-three/rapier';
 import { StationBeacon } from './StationBeacon';
+import { WORLD_STATIONS } from '../../world/stations';
 
 export const AirportBuildings: React.FC = () => {
   return (
@@ -76,14 +77,6 @@ export const AirportBuildings: React.FC = () => {
           </mesh>
         </RigidBody>
 
-        {/* Station Interaction Beacon for Control Tower */}
-        <StationBeacon
-          id="TOWER"
-          name="Control Tower"
-          action="Airspace & Airport Closures"
-          position={[0, 0.05, -28]}
-          color="#38bdf8"
-        />
       </group>
 
       {/* =========================================================================
@@ -129,14 +122,6 @@ export const AirportBuildings: React.FC = () => {
           <meshStandardMaterial color="#0f172a" />
         </mesh>
 
-        {/* Departure Board Station Beacon */}
-        <StationBeacon
-          id="DEPARTURE_BOARD"
-          name="Terminal Departure Boards"
-          action="Flight Delay Breakdown"
-          position={[-35, 0.05, 27]}
-          color="#38bdf8"
-        />
       </group>
 
       {/* =========================================================================
@@ -168,14 +153,6 @@ export const AirportBuildings: React.FC = () => {
           <meshStandardMaterial color="#38bdf8" transparent opacity={0.3} roughness={0.1} />
         </mesh>
 
-        {/* Gate Concourse Station Beacon */}
-        <StationBeacon
-          id="GATES"
-          name="Gate Concourse"
-          action="Passenger Crowds & Transfers"
-          position={[-23, 0.05, -12]}
-          color="#f59e0b"
-        />
       </group>
 
       {/* =========================================================================
@@ -211,14 +188,6 @@ export const AirportBuildings: React.FC = () => {
           <meshStandardMaterial color="#1e293b" roughness={0.3} />
         </mesh>
 
-        {/* Ops Centre Station Beacon */}
-        <StationBeacon
-          id="OPS_CENTER"
-          name="Operations Centre"
-          action="AI Crisis Dispatcher"
-          position={[35, 0.05, 27]}
-          color="#10b981"
-        />
       </group>
 
       {/* =========================================================================
@@ -249,15 +218,19 @@ export const AirportBuildings: React.FC = () => {
           <meshStandardMaterial color="#f59e0b" roughness={0.5} />
         </mesh>
 
-        {/* Hangar Station Beacon */}
-        <StationBeacon
-          id="HANGAR"
-          name="Maintenance Hangar"
-          action="Standby Spare Aircraft"
-          position={[40, 0.05, -17]}
-          color="#f59e0b"
-        />
       </group>
+
+      {WORLD_STATIONS.map((station) => (
+        <StationBeacon
+          key={station.id}
+          id={station.id}
+          name={station.name}
+          action={station.action}
+          position={station.position}
+          color={station.color}
+          radius={6}
+        />
+      ))}
     </group>
   );
 };

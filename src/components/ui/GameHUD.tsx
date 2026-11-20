@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { useGameStore } from '../../store/gameStore';
+import { useSimulationStore } from '../../store/simulationStore';
 import { audio } from '../../services/audioService';
-import { Clock, Radio, Volume2, VolumeX, Compass, Navigation, Trophy } from 'lucide-react';
+import { missionStep, waypointFor } from '../../world/mission';
+import { toHHMM } from '../../engine';
+import { Clock, Radio, Volume2, VolumeX, Navigation, Trophy, Users, Timer, Plane } from 'lucide-react';
 
 export const GameHUD: React.FC = () => {
   const {
@@ -13,7 +16,18 @@ export const GameHUD: React.FC = () => {
     currentAirportId,
     activeStation,
     setActiveStation,
+    playerPosition,
+    stationsVisited,
+    markStationVisited,
   } = useGameStore();
+
+  const closure = useSimulationStore((state) => state.closure);
+  const simResult = useSimulationStore((state) => state.simResult);
+  const appliedActions = useSimulationStore((state) => state.appliedActions);
+  const metrics = simResult?.metrics;
+  const step = missionStep(closure, appliedActions, stationsVisited);
+  const objective = currentObjective.startsWith('Worst Day') ? currentObjective : step.text;
+  const waypoint = waypointFor(step, playerPosition);
 
   // Convert minutes from 00:00 to HH:MM format
   const formatTime = (totalMins: number) => {
@@ -31,6 +45,7 @@ export const GameHUD: React.FC = () => {
           setActiveStation(null);
           audio.playClick();
         } else if (nearbyStation) {
+          markStationVisited(nearbyStation.id);
           setActiveStation(nearbyStation.id);
           audio.playAirportChime();
         }
@@ -42,7 +57,7 @@ export const GameHUD: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [nearbyStation, activeStation, setActiveStation]);
+  }, [nearbyStation, activeStation, setActiveStation, markStationVisited]);
 
   return (
     <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10 }}>
@@ -113,7 +128,10 @@ export const GameHUD: React.FC = () => {
           </div>
 
           <button
-            onClick={() => setActiveStation('SCORE_AND_WORST_DAY')}
+            onClick={() => {
+              markStationVisited('SCORE_AND_WORST_DAY');
+              setActiveStation('SCORE_AND_WORST_DAY');
+            }}
             style={{
               background: 'rgba(15, 23, 42, 0.75)',
               backdropFilter: 'blur(8px)',
@@ -187,10 +205,55 @@ export const GameHUD: React.FC = () => {
         }}
       >
         <Radio size={14} color="#f59e0b" />
-        <span style={{ fontSize: 13, color: '#f1f5f9', fontWeight: 500 }}>
-          {currentObjective}
+        <span style={{ fontSize: 13, color: '#f1f5f9', fontWeight: 500, maxWidth: 640, textAlign: 'center' }}>
+          {objective}
         </span>
       </div>
+
+      <div
+        style={{
+          position: 'absolute',
+          top: 128,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          gap: 8,
+          alignItems: 'center',
+        }}
+      >
+        <MetricPill
+          label={closure ? 'Ground stop' : 'Network'}
+          value={closure ? `${closure.airport} ${toHHMM(closure.start)}–${toHHMM(closure.end)}` : `On time · ${currentAirportId}`}
+          tone={closure ? 'alert' : 'ok'}
+        />
+        <MetricPill icon={<Users size={13} />} label="Stranded" value={metrics ? String(metrics.stranded_passengers) : '—'} />
+        <MetricPill icon={<Timer size={13} />} label="Delay min" value={metrics ? String(metrics.total_delay_minutes) : '—'} />
+        <MetricPill icon={<Plane size={13} />} label="Cancelled" value={metrics ? String(metrics.cancelled_flights) : '—'} />
+        <MetricPill label="Score" value={metrics ? String(metrics.shift_score) : '—'} tone="score" />
+      </div>
+
+      {waypoint && !activeStation && (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 78,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'rgba(15, 23, 42, 0.8)',
+            border: `1px solid ${waypoint.color}`,
+            borderRadius: 999,
+            padding: '6px 14px',
+            fontSize: 12,
+            color: '#e2e8f0',
+            display: 'flex',
+            gap: 8,
+            alignItems: 'center',
+          }}
+        >
+          <Navigation size={13} color={waypoint.color} />
+          Next: <b>{waypoint.name}</b> · {waypoint.meters}m {waypoint.compass}
+        </div>
+      )}
 
       {/* Interaction Prompt (Press E) */}
       {nearbyStation && !activeStation && (
@@ -257,3 +320,37 @@ export const GameHUD: React.FC = () => {
     </div>
   );
 };
+
+function MetricPill({
+  label,
+  value,
+  icon,
+  tone = 'neutral',
+}: {
+  label: string;
+  value: string;
+  icon?: React.ReactNode;
+  tone?: 'neutral' | 'ok' | 'alert' | 'score';
+}) {
+  const border =
+    tone === 'alert' ? 'rgba(248, 113, 113, 0.7)' : tone === 'ok' ? 'rgba(52, 211, 153, 0.7)' : tone === 'score' ? 'rgba(251, 191, 36, 0.7)' : 'rgba(148, 163, 184, 0.35)';
+  const valueColor = tone === 'alert' ? '#fecaca' : tone === 'ok' ? '#6ee7b7' : tone === 'score' ? '#fde68a' : '#f8fafc';
+
+  return (
+    <div
+      style={{
+        background: 'rgba(15, 23, 42, 0.82)',
+        border: `1px solid ${border}`,
+        borderRadius: 12,
+        padding: '6px 10px',
+        minWidth: 86,
+      }}
+    >
+      <div style={{ fontSize: 10, letterSpacing: '0.06em', color: '#94a3b8', display: 'flex', gap: 4, alignItems: 'center' }}>
+        {icon}
+        {label}
+      </div>
+      <div style={{ fontSize: 13, fontWeight: 700, color: valueColor, marginTop: 2 }}>{value}</div>
+    </div>
+  );
+}

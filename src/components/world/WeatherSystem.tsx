@@ -66,17 +66,26 @@ export const WeatherSystem: React.FC = () => {
 
     // 2. Dynamic Fog Adjustment
     if (scene.fog && scene.fog instanceof THREE.Fog) {
-      const targetNear = isStorming ? 35 : 120;
-      const targetFar = isStorming ? 180 : 380;
+      const targetNear = isStorming ? 28 : 90;
+      const targetFar = isStorming ? 160 : 340;
       scene.fog.near = THREE.MathUtils.lerp(scene.fog.near, targetNear, 0.05);
       scene.fog.far = THREE.MathUtils.lerp(scene.fog.far, targetFar, 0.05);
 
       const targetFogColor = isStorming
         ? new THREE.Color(0x1e293b)
         : isDay
-        ? new THREE.Color(0x1e293b)
+        ? new THREE.Color(0xbae6fd)
         : new THREE.Color(0x090d16);
       scene.fog.color.lerp(targetFogColor, 0.05);
+    }
+
+    if (scene.background instanceof THREE.Color) {
+      const targetSky = isStorming
+        ? new THREE.Color(0x0f172a)
+        : isDay
+        ? new THREE.Color(0x7dd3fc)
+        : new THREE.Color(0x020617);
+      scene.background.lerp(targetSky, 0.04);
     }
 
     // 3. Rain Particle Simulation (inspired by source-drone-world)
