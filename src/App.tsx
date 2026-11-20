@@ -8,7 +8,13 @@ import { AirportBuildings } from './components/world/AirportBuildings';
 import { RunwayAndApron } from './components/world/RunwayAndApron';
 import { GroundVehicles } from './components/world/GroundVehicles';
 import { StationModal } from './components/modals/StationModal';
+import { TowerStationView } from './components/modals/TowerStationView';
+import { DepartureBoardView } from './components/modals/DepartureBoardView';
+import { GatesStationView } from './components/modals/GatesStationView';
+import { HangarStationView } from './components/modals/HangarStationView';
 import { useGameStore } from './store/gameStore';
+import { useSimulationStore } from './store/simulationStore';
+import { validateFlightNetwork } from './engine';
 
 // Ecctrl keyboard map
 const keyboardMap = [
@@ -22,6 +28,25 @@ const keyboardMap = [
 
 export const App: React.FC = () => {
   const activeStation = useGameStore((state) => state.activeStation);
+  const setDataset = useSimulationStore((state) => state.setDataset);
+
+  // Load and validate flight network dataset at startup
+  useEffect(() => {
+    fetch('/data/flight_network.json')
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP error ${res.status} fetching flight network dataset`);
+        return res.json();
+      })
+      .then((data) => {
+        validateFlightNetwork(data);
+        setDataset(data);
+        console.log('Flight network dataset loaded and validated successfully.');
+      })
+      .catch((err) => {
+        console.error('Fatal flight network startup validation error:', err);
+        alert(`FATAL DATASET ERROR: ${err.message}`);
+      });
+  }, [setDataset]);
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}>
@@ -29,36 +54,16 @@ export const App: React.FC = () => {
 
       {/* Station Panel Modal */}
       <StationModal>
-        {activeStation === 'TOWER' && (
-          <div style={{ color: '#f8fafc', padding: 12 }}>
-            <h3 style={{ fontSize: 18, color: '#38bdf8', marginBottom: 8 }}>ATC Control Tower Console</h3>
-            <p style={{ color: '#94a3b8' }}>
-              Select an airport and declare emergency airspace closures. Observe real-time ripple effects across India's 16-airport network.
-            </p>
-          </div>
-        )}
-        {activeStation === 'DEPARTURE_BOARD' && (
-          <div style={{ color: '#f8fafc', padding: 12 }}>
-            <h3 style={{ fontSize: 18, color: '#38bdf8', marginBottom: 8 }}>Terminal Flight Information Display</h3>
-            <p style={{ color: '#94a3b8' }}>Real-time flight statuses, delay minutes, and causal attribution chain.</p>
-          </div>
-        )}
+        {activeStation === 'TOWER' && <TowerStationView />}
+        {activeStation === 'DEPARTURE_BOARD' && <DepartureBoardView />}
+        {activeStation === 'GATES' && <GatesStationView />}
+        {activeStation === 'HANGAR' && <HangarStationView />}
         {activeStation === 'OPS_CENTER' && (
           <div style={{ color: '#f8fafc', padding: 12 }}>
             <h3 style={{ fontSize: 18, color: '#10b981', marginBottom: 8 }}>Airline Operations Dispatch</h3>
-            <p style={{ color: '#94a3b8' }}>Autonomous AI recovery planner proposing candidate mitigations verified by the engine.</p>
-          </div>
-        )}
-        {activeStation === 'GATES' && (
-          <div style={{ color: '#f8fafc', padding: 12 }}>
-            <h3 style={{ fontSize: 18, color: '#f59e0b', marginBottom: 8 }}>Gate Concourse & Passenger Crowds</h3>
-            <p style={{ color: '#94a3b8' }}>Stranded passengers and missed connection transfers.</p>
-          </div>
-        )}
-        {activeStation === 'HANGAR' && (
-          <div style={{ color: '#f8fafc', padding: 12 }}>
-            <h3 style={{ fontSize: 18, color: '#f59e0b', marginBottom: 8 }}>Maintenance Hangar & Spares</h3>
-            <p style={{ color: '#94a3b8' }}>Standby reserve aircraft fleet status and bases.</p>
+            <p style={{ color: '#94a3b8' }}>
+              Autonomous AI recovery planner proposing candidate mitigations verified by the engine.
+            </p>
           </div>
         )}
       </StationModal>
