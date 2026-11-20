@@ -46,35 +46,36 @@ export const WeatherSystem: React.FC = () => {
     const t = clock.getElapsedTime();
 
     // 1. Day / Night Sun Position
-    // simClockMins runs from 0 to 1440
+    // simClockMins runs from 0 to 1440. 06:00 is morning flight operations start.
     const hour = simClockMins / 60; // 0 to 24
-    const sunAngle = ((hour - 6) / 24) * Math.PI * 2; // Sunrise at 06:00
-    const sunElev = Math.sin(sunAngle);
-    const isDay = sunElev > 0;
+    const isDay = hour >= 5.5 && hour <= 19.0;
+    const dayProgress = Math.max(0, Math.min(Math.PI, ((hour - 5) / 14) * Math.PI));
+    const sunElev = isDay ? Math.sin(dayProgress) : 0.25;
+    const sunAngle = ((hour - 5) / 14) * Math.PI;
 
     if (sunLightRef.current) {
       sunLightRef.current.position.set(
         Math.cos(sunAngle) * 80,
-        Math.max(-20, sunElev * 100),
+        Math.max(30, sunElev * 90),
         Math.sin(sunAngle) * 60
       );
-      // Dim sun during storm
-      const stormMul = isStorming ? 0.35 : 1.0;
-      sunLightRef.current.intensity = isDay ? (0.4 + sunElev * 1.2) * stormMul : 0.08;
+      // Dim sun slightly during storm, keep airport clearly visible
+      const stormMul = isStorming ? 0.55 : 1.0;
+      sunLightRef.current.intensity = (0.75 + sunElev * 1.0) * stormMul;
     }
 
     // 2. Dynamic Fog Adjustment
     if (scene.fog && scene.fog instanceof THREE.Fog) {
-      const targetNear = isStorming ? 25 : 80;
-      const targetFar = isStorming ? 130 : 280;
+      const targetNear = isStorming ? 35 : 120;
+      const targetFar = isStorming ? 180 : 380;
       scene.fog.near = THREE.MathUtils.lerp(scene.fog.near, targetNear, 0.05);
       scene.fog.far = THREE.MathUtils.lerp(scene.fog.far, targetFar, 0.05);
 
       const targetFogColor = isStorming
         ? new THREE.Color(0x1e293b)
         : isDay
-        ? new THREE.Color(0x0f172a)
-        : new THREE.Color(0x020617);
+        ? new THREE.Color(0x1e293b)
+        : new THREE.Color(0x090d16);
       scene.fog.color.lerp(targetFogColor, 0.05);
     }
 

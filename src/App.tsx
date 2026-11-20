@@ -72,16 +72,16 @@ export const App: React.FC = () => {
       <KeyboardControls map={keyboardMap}>
         <Canvas
           shadows
-          camera={{ position: [0, 5, 10], fov: 60 }}
+          camera={{ position: [0, 4.5, 17], fov: 60 }}
           style={{ width: '100%', height: '100%' }}
         >
           {/* Sky & Atmosphere Lighting & Procedural Weather */}
-          <color attach="background" args={['#0b1329']} />
-          <ambientLight intensity={0.4} />
+          <color attach="background" args={['#0f172a']} />
+          <ambientLight intensity={0.75} />
           <WeatherSystem />
 
           <Suspense fallback={null}>
-            <Physics timeStep="vary" gravity={[0, -9.81, 0]}>
+            <Physics gravity={[0, -9.81, 0]}>
               {/* Ground Asphalt Plane */}
               <RigidBody type="fixed" friction={1.2}>
                 <mesh receiveShadow position={[0, -0.5, 0]}>
@@ -107,7 +107,7 @@ export const App: React.FC = () => {
               <AirportBuildings />
 
               {/* 3D Network Hologram with Flight Arcs & Moving Aircraft */}
-              <NetworkHologram position={[0, 0.2, 5]} scale={0.85} />
+              <NetworkHologram position={[0, 0.2, 0]} scale={0.85} />
 
               {/* Runway, Apron, and Parked Aircraft */}
               <RunwayAndApron />

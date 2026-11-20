@@ -42,10 +42,10 @@ export const ControllerPlayer: React.FC = () => {
         jump,
       });
 
-      // Update camera follow target
+      // Update camera follow target (use moveTo without transition to keep 3rd-person offset)
       const currPos = ecctrlRef.current.currPos;
       if (currPos && cameraControlsRef.current) {
-        cameraControlsRef.current.setTarget(currPos.x, currPos.y + 0.9, currPos.z, true);
+        cameraControlsRef.current.moveTo(currPos.x, currPos.y + 0.9, currPos.z, false);
       }
 
       // Update global player position for interaction range checks
@@ -67,16 +67,14 @@ export const ControllerPlayer: React.FC = () => {
       />
       <Ecctrl
         ref={ecctrlRef}
-        position={[0, 2, 0]}
-        maxWalkVel={3.2}
-        maxRunVel={7.0}
-        jumpVel={6}
+        position={[0, 1.2, 10]}
+        groundDetection="rayCast"
+        maxWalkVel={3.5}
+        maxRunVel={7.5}
+        jumpVel={5}
         capsuleRadius={0.35}
         capsuleHalfHeight={0.45}
-        floatHeight={0.25}
-        springK={4000}
-        dampingC={600}
-        autoBalance={true}
+        floatHeight={0.2}
       >
         <ControllerAvatar isMoving={isMoving} />
       </Ecctrl>
